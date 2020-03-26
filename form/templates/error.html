@@ -2,13 +2,34 @@
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="https://fonts.googleapis.com/css?family=Baloo+Thambi+2&display=swap" rel="stylesheet">
+
 <style>
     body {
-        background-color: red;
-    }
+        background-color: #C90610;
+        font-family: 'Baloo Thambi 2', cursive;
+
+        }
     h1 {
         text-align: center;
+        margin: 6%;
         margin-top: 20%;
+    }
+    .button {
+        text-align: center;
+    }
+    button{
+        padding: 1%;
+        padding-left: 6%;
+        padding-right: 6%;
+        border-radius: 69px 69px 69px 69px;
+        border: none;
+        background-color: white;
+        color: black;
+    }
+    a{
+        text-decoration: none;
+        font-size: 25px;
     }
 </style>
 </head>
@@ -16,5 +37,8 @@
     <h1>
         {{ alerts }}
     </h1>
+    <div class="button">
+        <a href="/"> <button>  Exit </button></a>
+    </div>
 </body>
 </html>
