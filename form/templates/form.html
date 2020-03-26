@@ -31,7 +31,6 @@ input[type=submit] {
   border: none;
   border-radius: 4px;
   cursor: pointer;
-  float: right;
 }
 
 input[type=submit]:hover {
@@ -57,6 +56,9 @@ input[type=submit]:hover {
   margin-top: 6px;
 }
 
+.row {
+  text-align: center;
+}
 /* Clear floats after the columns */
 .row:after {
   content: "";
@@ -78,8 +80,45 @@ input[type=submit]:hover {
 <h2>Safety Form</h2>
 
 <div class="container">
-  <form action="/action_page.php">
-    <div class="row">
+  <form action="{% url 'covidForm' %}" method="POST">
+    
+    {% csrf_token %}
+    <!-- {{form}} -->
+    {{ form.non_field_errors }}
+    <div class="fieldWrapper">
+        {{ form.subject.errors }}
+        <label for="{{ form.subject.id_for_label }}">Name:</label>
+        {{ form.Name }}
+    </div>
+    <div class="fieldWrapper">
+        <!-- {{ form.message.errors }} -->
+        <label for="{{ form.message.id_for_label }}">1.	Have you experience a new (in the past 2 weeks):<br><br>
+          a.	Cough<br>
+          b.	Fever<br>
+          c.	Runny nose<br>
+          d.	Sore throat<br>
+          e.	Difficulty breathing</label>
+        {{ form.question1 }}
+    </div>
+    <div class="fieldWrapper">
+        <!-- {{ form.sender.errors }} -->
+        <label for="{{ form.sender.id_for_label }}">2. Have you traveled internationally in the past 14 days? </label>
+        {{ form.question2 }}
+    </div>
+    <div class="fieldWrapper">
+      <!-- {{ form.sender.errors }} -->
+      <label for="{{ form.sender.id_for_label }}">3. Have you been in close contact with a confirmed or probable case of COVID-19?</label>
+      {{ form.question3 }}
+  </div>
+  <div class="fieldWrapper">
+    <!-- {{ form.sender.errors }} -->
+    <label for="{{ form.sender.id_for_label }}">4. Have you been in close contact with a person with acute respiratory illness who has been outside of Canada in the last 14 days?</label>
+    {{ form.question4 }}
+</div>
+
+
+
+    <!-- <div class="row">
       <div class="col-25">
         <label for="firstname">First Name</label>
       </div>
@@ -140,6 +179,9 @@ input[type=submit]:hover {
         </div>
       </div>
     
+    <div class="row">
+      <input type="submit" value="Submit">
+    </div> -->
     <div class="row">
       <input type="submit" value="Submit">
     </div>
