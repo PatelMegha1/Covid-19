@@ -2,10 +2,8 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from .forms import CovidForm
 from datetime import datetime 
-from django.core.mail import BadHeaderError, send_mail
+from django.core.mail import send_mail
 from django.http import HttpResponse, HttpResponseRedirect
-from django.core.mail import EmailMessage
-import traceback
 
 # Create your views here.
 def form(request, *args, **kwargs):
@@ -39,5 +37,5 @@ def success(request, *args, **kwargs):
 
 
 def email(request):
-    send_mail('header', 'hello','ndesai@dsstoronto.com',['mpatel@dsstoronto.com'], fail_silently = False)
+    send_mail('header', 'hello','todaycovid@gmail.com',['mpatel@dsstoronto.com'], fail_silently = False)
     return render(request, 'success.html')
