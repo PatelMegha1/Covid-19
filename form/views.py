@@ -50,3 +50,6 @@ def download_csv(request):
     return response
 
 
+def email(request):
+    send_mail('header', 'hello','todaycovid@gmail.com',['mpatel@dsstoronto.com'], fail_silently = False)
+    return render(request, 'success.html')
