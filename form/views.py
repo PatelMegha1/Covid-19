@@ -1,14 +1,12 @@
 import csv
 
 from django.shortcuts import render, redirect
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
+from django.core.mail import send_mail
+
 from .forms import CovidForm
 from datetime import datetime 
-from django.http import HttpResponse
 from .models import CovidModel
-
-
-
 
 # Create your views here.
 def form(request, *args, **kwargs):
@@ -48,5 +46,11 @@ def download_csv(request):
     for obj in items:
         writer.writerow([obj.Name, obj.question1, obj.question2, obj.question3, obj.question4, obj.date])
 
-    # print(response.body())
+   # print(response.body())
     return response
+
+
+def email(request):
+    send_mail('header', 'hello','ndesai@dsstoronto.com',['mpatel@dsstoronto.com'], fail_silently = False)
+    return render(request, 'success.html')
+
