@@ -1,7 +1,13 @@
+import csv
+
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from .forms import CovidForm
 from datetime import datetime 
+from django.http import HttpResponse
+from .models import CovidModel
+
+
 
 
 # Create your views here.
@@ -22,7 +28,7 @@ def form(request, *args, **kwargs):
                     return render(request, 'error.html',{'alerts':alert})
             else:
                 print("Success condition")
-                return redirect('success/')
+                return render(request, 'success.html')
     else:
         form = CovidForm()
         print("GET")
@@ -30,6 +36,17 @@ def form(request, *args, **kwargs):
 
 
 
+def download_csv(request):
+    items = CovidModel.objects.all()
 
-def success(request, *args, **kwargs):
-    return render(request, 'success.html')
+    # Create the HttpResponse object with the appropriate CSV header.
+    response = HttpResponse(content_type='text/csv')
+    response['Content-Disposition'] = 'attachment; filename="Covid_Survey_report_on_' + str(datetime.now())  + '.csv"'
+
+    writer = csv.writer(response, delimiter = ',')
+    writer.writerow(['Name','Question1','Question2', 'Question3', 'Question4', 'Date'])
+    for obj in items:
+        writer.writerow([obj.Name, obj.question1, obj.question2, obj.question3, obj.question4, obj.date])
+
+    # print(response.body())
+    return response
